@@ -1,0 +1,444 @@
+{
+  "datasets": [
+    {
+      "name": "cc330cb0",
+      "displayName": "sales_transactions",
+      "config": {
+        "version": "1.1",
+        "source": "samples.bakehouse.sales_transactions",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "18cee6fa",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "revenue-by-product",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cc330cb0",
+                  "fields": [
+                    {
+                      "name": "product",
+                      "expression": "`product`"
+                    },
+                    {
+                      "name": "sum(totalPrice)",
+                      "expression": "SUM(`totalPrice`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Revenue By Product",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "product",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(totalPrice)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "date-by-revenue",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cc330cb0",
+                  "fields": [
+                    {
+                      "name": "daily(dateTime)",
+                      "expression": "DATE_TRUNC(\"DAY\", `dateTime`)"
+                    },
+                    {
+                      "name": "sum(quantity)",
+                      "expression": "SUM(`quantity`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Date By Revenue ",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "daily(dateTime)",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(quantity)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 3,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "2b07f250",
+            "multilineTextboxSpec": {
+              "lines": [
+                "<span style=\"font-size: 36px;line-height: 1.5;\">BakeHouse Sales DashBoard</span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 5,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "5f44e458",
+            "spec": {
+              "encodings": {
+                "fields": []
+              },
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "frame": {
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 9,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "46569d67",
+            "queries": [
+              {
+                "name": "dashboards/01f1d84cc54310fb9ce985a4972d5b25/datasets/01f1d84cd64e1f17a3e8c6f11dc20ed3_product",
+                "query": {
+                  "datasetName": "cc330cb0",
+                  "fields": [
+                    {
+                      "name": "product",
+                      "expression": "`product`"
+                    },
+                    {
+                      "name": "product_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "product",
+                    "queryName": "dashboards/01f1d84cc54310fb9ce985a4972d5b25/datasets/01f1d84cd64e1f17a3e8c6f11dc20ed3_product"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "c6eb9bff",
+            "queries": [
+              {
+                "name": "dashboards/01f1d84cc54310fb9ce985a4972d5b25/datasets/01f1d84cd64e1f17a3e8c6f11dc20ed3_paymentMethod",
+                "query": {
+                  "datasetName": "cc330cb0",
+                  "fields": [
+                    {
+                      "name": "paymentMethod",
+                      "expression": "`paymentMethod`"
+                    },
+                    {
+                      "name": "paymentMethod_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "paymentMethod",
+                    "queryName": "dashboards/01f1d84cc54310fb9ce985a4972d5b25/datasets/01f1d84cd64e1f17a3e8c6f11dc20ed3_paymentMethod"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "2b69fd95",
+            "queries": [
+              {
+                "name": "dashboards/01f1d84cc54310fb9ce985a4972d5b25/datasets/01f1d84cd64e1f17a3e8c6f11dc20ed3_dateTime",
+                "query": {
+                  "datasetName": "cc330cb0",
+                  "fields": [
+                    {
+                      "name": "dateTime",
+                      "expression": "`dateTime`"
+                    },
+                    {
+                      "name": "dateTime_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "widgetType": "filter-date-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "dateTime",
+                    "queryName": "dashboards/01f1d84cc54310fb9ce985a4972d5b25/datasets/01f1d84cd64e1f17a3e8c6f11dc20ed3_dateTime"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 2,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "customers",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cc330cb0",
+                  "fields": [
+                    {
+                      "name": "countdistinct(customerID)",
+                      "expression": "COUNT(DISTINCT `customerID`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Customers",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "countdistinct(customerID)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "revenue-1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cc330cb0",
+                  "fields": [
+                    {
+                      "name": "sum(totalPrice)",
+                      "expression": "SUM(`totalPrice`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Revenue",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(totalPrice)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 0,
+            "width": 4,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
